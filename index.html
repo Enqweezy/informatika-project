@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Как устроен компьютер</title>
+
+<style>
+/* ================= БАЗОВЫЕ СТИЛИ ================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Segoe UI,Arial;
+}
+
+body{
+  background:#0c0f1a;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* ================= HEADER ================= */
+header{
+  text-align:center;
+  padding:35px;
+  font-size:40px;
+  background:#111a30;
+  letter-spacing:3px;
+}
+
+/* ================= NAV ================= */
+nav{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  padding:20px;
+}
+
+nav button{
+  padding:10px 18px;
+  border:none;
+  background:#1d2d55;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+nav button:hover{
+  background:#3c6bff;
+  transform:scale(1.1);
+}
+
+/* ================= ПРОГРЕСС БАР ================= */
+.progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:4px;
+  background:#3c6bff;
+  width:0%;
+  z-index:999;
+}
+
+/* ================= КОНТЕЙНЕР ================= */
+.container{
+  width:90%;
+  max-width:1300px;
+  margin:auto;
+}
+
+/* ================= СЕКЦИИ ================= */
+.section{
+  margin-top:60px;
+  padding:40px;
+  background:#ffffff0a;
+  border-radius:15px;
+}
+
+/* ================= GRID ================= */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:25px;
+  margin-top:25px;
+}
+
+/* ================= КАРТОЧКИ ================= */
+.card{
+  background:#00000066;
+  border-radius:12px;
+  overflow:hidden;
+  cursor:pointer;
+  transition:.4s;
+}
+
+.card:hover{
+  transform:scale(1.05);
+  box-shadow:0 10px 40px #000;
+}
+
+.card img{
+  width:100%;
+  height:200px;
+  object-fit:cover;
+}
+
+.card h3{
+  padding:10px;
+}
+
+.card p{
+  padding:0 10px 20px;
+  font-size:14px;
+}
+
+/* ================= ПОИСК ================= */
+.search{
+  text-align:center;
+  margin:30px;
+}
+
+.search input{
+  padding:12px;
+  width:260px;
+  border-radius:8px;
+  border:none;
+}
+
+/* ================= ACCORDION ================= */
+.accordion button{
+  width:100%;
+  padding:15px;
+  border:none;
+  background:#1c2a4a;
+  color:white;
+  text-align:left;
+  cursor:pointer;
+}
+
+.accordion-content{
+  display:none;
+  padding:15px;
+  background:#111b34;
+}
+
+/* ================= MODAL ================= */
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal img{
+  max-width:80%;
+  border-radius:12px;
+}
+
+/* ================= FOOTER ================= */
+footer{
+  text-align:center;
+  padding:40px;
+  opacity:.6;
+}
+
+/* ================= КНОПКА НАВЕРХ ================= */
+#topBtn{
+  position:fixed;
+  bottom:30px;
+  right:30px;
+  padding:12px 16px;
+  border:none;
+  border-radius:50%;
+  background:#3c6bff;
+  color:white;
+  cursor:pointer;
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header>Как устроен компьютер</header>
+
+<nav>
+  <button onclick="scrollToSection('cpu')">CPU</button>
+  <button onclick="scrollToSection('gpu')">GPU</button>
+  <button onclick="scrollToSection('ram')">RAM</button>
+  <button onclick="scrollToSection('storage')">SSD</button>
+  <button onclick="toggleTheme()">Тема</button>
+</nav>
+
+<div class="search">
+  <input id="search" placeholder="Поиск компонента">
+</div>
+
+<div class="container">
+
+<!-- Общая информация -->
+<div class="section">
+  <h2>Что такое компьютер</h2>
+  <p>
+    Компьютер — это электронное устройство, предназначенное для приема, обработки, хранения и передачи информации. Он выполняет команды программ, позволяя решать разнообразные задачи: от простых вычислений до сложной обработки графики и работы с интернетом.
+  </p>
+</div>
+
+<!-- CPU -->
+<div class="section" id="cpu">
+  <h2>Процессор</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/cpu.jpg">
+      <h3>CPU</h3>
+      <p>Процессор — это центральная часть компьютера, выполняющая все вычисления и обработку команд программ. Он управляет работой других компонентов, обрабатывает данные и обеспечивает выполнение инструкций, превращая информацию в результат.</p>
+    </div>
+    <div class="card">
+      <img src="images/cpu-cores.jpg">
+      <h3>Ядра процессора</h3>
+      <p>Это отдельные вычислительные блоки внутри процессора, которые позволяют выполнять несколько задач одновременно. Чем больше ядер, тем быстрее и эффективнее работает компьютер при многозадачности и сложных вычислениях.</p>
+    </div>
+  </div>
+  <div class="accordion">
+    <button>Подробнее о процессоре</button>
+    <div class="accordion-content">
+      Процессор — это центральное устройство компьютера, которое выполняет все вычисления и обработку команд программ. Он получает данные из памяти, выполняет арифметические и логические операции и управляет работой всех остальных компонентов компьютера.
+
+Процессор состоит из ядер, каждое из которых способно обрабатывать задачи самостоятельно, и кэш-памяти, которая хранит часто используемые данные для ускорения работы. Чем больше ядер и выше частота процессора, тем быстрее компьютер справляется с многозадачностью и сложными вычислениями.
+
+Процессор соединяется с остальной системой через шины и контроллеры, обеспечивая постоянный обмен данными с памятью, видеокартой и устройствами ввода-вывода. Он является «мозгом» компьютера, превращая информацию в результат и координируя работу всех компонентов.    </div>
+  </div>
+</div>
+
+<!-- GPU -->
+<div class="section" id="gpu">
+  <h2>Видеокарта</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/gpu.jpg">
+      <h3>GPU</h3>
+      <p>Устройство компьютера, которое отвечает за обработку графики и отображение изображений на экране. Она выполняет сложные вычисления для игр, видео, 3D-моделей и анимации, разгружая процессор. Видеокарта имеет собственную память (VRAM) для хранения графических данных, что ускоряет работу с изображениями и видео.</p>
+    </div>
+    <div class="card">
+      <img src="images/gpu-cooler.jpg">
+      <h3>Система охлаждения</h3>
+      <p>Система охлаждения — это часть компьютера, которая отводит тепло от процессора и других компонентов, чтобы они не перегревались. Она может быть воздушной с вентиляторами или жидкостной с радиаторами и насосами.</p>
+    </div>
+  </div>
+</div>
+
+<!-- RAM -->
+<div class="section" id="ram">
+  <h2>Оперативная память</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/ram.jpg">
+      <h3>RAM</h3>
+      <p>Это временное хранилище данных, с которым компьютер работает прямо сейчас. Она обеспечивает быструю обработку информации и позволяет одновременно запускать несколько программ.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Storage -->
+<div class="section" id="storage">
+  <h2>Накопители</h2>
+  <div class="grid">
+    <div class="card">
+      <img src="images/ssd.jpg">
+      <h3>SSD</h3>
+      <p>SSD — это накопитель данных для компьютера, который хранит информацию и программы. Он работает быстрее обычного жесткого диска, обеспечивая быструю загрузку системы и приложений.</p>
+    </div>
+    <div class="card">
+      <img src="images/hdd.jpg">
+      <h3>HDD</h3>
+      <p>Жесткий диск — это устройство для долговременного хранения данных на компьютере. На нем сохраняются файлы, программы и операционная система, даже когда питание выключено.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer>Сайт про устройство компьютера 
+p.s Агай не ставьте в полтора пж :з
+автор сайта Жунайтов Али</footer>
+
+<button id="topBtn">↑</button>
+
+<div class="modal" id="modal">
+  <img id="modalImg">
+</div>
+
+<script>
+/* ПЛАВНЫЙ СКРОЛЛ */
+function scrollToSection(id){
+  document.getElementById(id).scrollIntoView({behavior:"smooth"});
+}
+
+/* ПРОГРЕСС БАР */
+window.onscroll=function(){
+  let scrollTop=document.documentElement.scrollTop;
+  let height=document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  let progress=(scrollTop/height)*100;
+  document.getElementById("progress").style.width=progress+"%";
+
+  if(scrollTop>300){ topBtn.style.display="block"; } 
+  else { topBtn.style.display="none"; }
+}
+
+/* КНОПКА НАВЕРХ */
+topBtn.onclick=function(){
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+/* АККОРДЕОН */
+document.querySelectorAll(".accordion button").forEach(btn=>{
+  btn.onclick=function(){
+    let c=this.nextElementSibling;
+    c.style.display=c.style.display=="block"?"none":"block";
+  }
+});
+
+/* ПОИСК */
+search.addEventListener("keyup",function(){
+  let text=this.value.toLowerCase();
+  document.querySelectorAll(".card").forEach(card=>{
+    let title=card.innerText.toLowerCase();
+    card.style.display=title.includes(text)?"block":"none";
+  });
+});
+
+/* MODAL */
+let modal=document.getElementById("modal");
+let modalImg=document.getElementById("modalImg");
+document.querySelectorAll(".card img").forEach(img=>{
+  img.onclick=function(){
+    modal.style.display="flex";
+    modalImg.src=this.src;
+  }
+});
+modal.onclick=function(){ modal.style.display="none"; }
+
+/* ТЕМА */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
+
+/* ЧАСТИЦЫ */
+const canvas=document.createElement("canvas");
+document.body.appendChild(canvas);
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+canvas.style.position="fixed";
+canvas.style.top=0;
+canvas.style.left=0;
+canvas.style.zIndex=-1;
+
+let particles=[];
+for(let i=0;i<80;i++){
+  particles.push({x:Math.random()*canvas.width, y:Math.random()*canvas.height, r:Math.random()*2, dx:(Math.random()-0.5), dy:(Math.random()-0.5)});
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle="white";
+    ctx.fill();
+    p.x+=p.dx;
+    p.y+=p.dy;
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
